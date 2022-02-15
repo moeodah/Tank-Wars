@@ -1,0 +1,37 @@
+import java.awt.*;
+import javax.swing.*;
+import java.awt.event.*;
+import java.awt.Dimension;
+import javax.sound.sampled.*;
+import java.io.File;  // Import the File class
+
+
+public class TankFrame extends JFrame {
+    private Image img = Toolkit.getDefaultToolkit().getImage("Images/Background.jpg");
+    private JLabel imgHolder;
+    private ImageIcon bgIcon;
+    
+    public TankFrame(){
+        addComponants();
+
+
+
+    }
+
+    public void addComponants(){
+
+        this.setContentPane(new JPanel() {
+
+            // Setting the Background Image for the JFrame
+            @Override
+            public void paintComponent(Graphics g) {
+               super.paintComponent(g);
+               g.drawImage(img, 0, 0, getWidth(), getHeight(), this);
+            }
+         });
+         //------------------- Adding the componants -------------------//
+         Dimension screenSize = new Dimension(Toolkit.getDefaultToolkit().getScreenSize());
+         setLayout(null);
+         
+        }
+    }

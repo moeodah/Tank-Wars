@@ -33,5 +33,6 @@ public class TankFrame extends JFrame {
          Dimension screenSize = new Dimension(Toolkit.getDefaultToolkit().getScreenSize());
          setLayout(null);
          
+         JPanel
         }
     }

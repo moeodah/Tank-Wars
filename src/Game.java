@@ -24,6 +24,10 @@ public class Game extends JFrame {
     static List<JButton> rList = new ArrayList<JButton>();
     static List<JButton> nList = new ArrayList<JButton>();
     static List<JButton> sList = new ArrayList<JButton>();
+    static int tanksnumber1 = 7;
+    static int tanksnumber2 = 7;
+    static int tanksnumber3 = 7;
+    static int tanksnumber4 = 7;
     int turn = 1;
     public Game(){
         this.team1 = "Team 1";
@@ -90,7 +94,7 @@ public class Game extends JFrame {
         nList = new ArrayList<JButton>();
         sList = new ArrayList<JButton>();
         ImageIcon rocketIcon = new ImageIcon("Images/Rocket.png");
-        ImageIcon shieldIcon = new ImageIcon("Images/shield.png");
+        ImageIcon shieldIcon = new ImageIcon("Images/Help.png");
         ImageIcon nukeIcon = new ImageIcon("Images/nuke.png");
         ImageIcon killTankIcon = new ImageIcon("Images/kill Tank.png");
         //--Team1--//
@@ -249,7 +253,7 @@ public class Game extends JFrame {
         //----Tank kill ----//
             for(int i = 0; i < 4 ; i++){
                 kills(kList.get(i),panels.get(i),tt.get(i),i+1);
-                shield(sList.get(i),panels.get(i),tt.get(i),i);
+                //addTank(sList.get(i),panels.get(i),tt.get(i),i);
             }
         //----Rocket----//
         for (int i = 0 ; i < 4 ; i ++){
@@ -373,9 +377,14 @@ public void kills(JButton k,JPanel p , List l,int score){
         // display/center the jdialog when the button is pressed
         if (l.size()>0){
             //if (isProtected(score)){
-        p.getComponent(l.size()-1).setVisible(false);
-        l.remove(l.size()-1);
-            //}
+                // p.getComponent(l.size()-1).setVisible(false);
+                p.getComponent(l.size()-1).setVisible(false);
+                ImageIcon tankIcon = new ImageIcon("Images/expo.gif");
+                //l.set(l.size()-1, new JLabel(tankIcon));
+                l.remove(l.size()-1);
+                p.add(new JLabel(tankIcon));
+                p.remove(p.getComponentCount());
+
         }
         protect[score] = false;
         //undoshield(p);
@@ -393,6 +402,7 @@ public void rockets(JButton k, List<JPanel> p , List<List<JLabel>> l,int score,S
     {
       public void actionPerformed(ActionEvent e)
       {
+        ImageIcon tankIcon = new ImageIcon("Images/expo.gif");
         // display/center the jdialog when the button is pressed
         ImageIcon icon = new ImageIcon("Images/Rocket.png");
         int choices = JOptionPane.showOptionDialog(null, "Which team do you want to use Rocket on?", "Inane custom dialog",
@@ -401,18 +411,24 @@ public void rockets(JButton k, List<JPanel> p , List<List<JLabel>> l,int score,S
             for(int i = 0;i < 2;i++){
             p.get(0).getComponent(l.get(0).size()-1).setVisible(false);
             l.get(0).remove(l.get(0).size()-1);
+            p.get(0).add(new JLabel(tankIcon));
+
             }
         }
         if (choices ==1 ){
             for(int i = 0;i < 2;i++){
             p.get(1).getComponent(l.get(1).size()-1).setVisible(false);
             l.get(1).remove(l.get(1).size()-1);
+            p.get(1).add(new JLabel(tankIcon));
+
             }
         }
         if (choices ==2 ){
             for(int i = 0;i < 2;i++){
             p.get(2).getComponent(l.get(2).size()-1).setVisible(false);
             l.get(2).remove(l.get(2).size()-1);
+            p.get(2).add(new JLabel(tankIcon));
+
             }
         }
         if (l.size()<= 0 ){
@@ -429,10 +445,13 @@ public void nuclear(JButton k, List<JPanel> p , List<List<JLabel>> l,int score,S
     {
       public void actionPerformed(ActionEvent e)
       {
+        ImageIcon tankIcon = new ImageIcon("Images/expo.gif");
         for(int i = 0 ; i < 3; i ++){
             if(l.get(i).size()>0){
             p.get(i).getComponent(l.get(i).size()-1).setVisible(false);
             l.get(i).remove(l.get(i).size()-1);
+            p.get(i).add(new JLabel(tankIcon));
+            
             }
         }
         if (l.size()<= 0 ){
@@ -444,22 +463,21 @@ public void nuclear(JButton k, List<JPanel> p , List<List<JLabel>> l,int score,S
     });
     
 }
-public void shield(JButton k,JPanel p, List l,int which){
-k.addActionListener(new ActionListener()
-{
-  public void actionPerformed(ActionEvent e)
-  {
-    Border border = new LineBorder(Color.BLUE, 4, true);
-    p.setBorder(border);
-    protect[which]=true;
-    if (l.size()<= 0 ){
-        killSwitch(which+1);
-    }
-    k.setEnabled(false);
-   }
-});
+// public void addTank(JButton k,JPanel p, List l,int which){
+// k.addActionListener(new ActionListener()
+// {
+//   public void actionPerformed(ActionEvent e)
+//   {
+//     ImageIcon tankIcon = new ImageIcon("Images/Tank.png");
+//       JLabel newTankJLabel= new JLabel(tankIcon);
+//      p.getComponent(l.size()-1).setVisible(false);
+//     //k.setEnabled(false);
+//      l.add(newTankJLabel);
+//      p.remove();
+//    }
+// });
 
-}
+//}
 public static void play(String filename)
 {
   try
